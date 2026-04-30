@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Level.io Support</title>
+  <meta name="description" content="Support contact information for Level.io.">
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #0d0d18;
+      --panel: #20285f;
+      --panel-2: #171a3c;
+      --gold: #ffbf2f;
+      --cream: #fff1bd;
+      --muted: #b8b4c9;
+      --link: #7bdcff;
+      --border: #9a7417;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: var(--cream);
+      background: var(--bg);
+    }
+
+    main {
+      width: min(860px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0;
+    }
+
+    article {
+      border: 2px solid var(--border);
+      padding: clamp(22px, 5vw, 40px);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 14px;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      line-height: 1;
+    }
+
+    h2 {
+      color: var(--gold);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    ul {
+      padding-left: 1.3rem;
+    }
+
+    .contact {
+      display: inline-block;
+      margin: 8px 0;
+      font-size: 1.15rem;
+    }
+
+    nav {
+      margin-bottom: 18px;
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5df9b;
+        --panel: #fff4c7;
+        --panel-2: #efd074;
+        --cream: #26180d;
+        --muted: #5d4d39;
+        --link: #0a5f85;
+        --border: #8c650f;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Site navigation">
+      <a href="index.html">Level.io</a> / Support
+    </nav>
+
+    <article>
+      <h1>Level.io Support</h1>
+      <p>Thanks for using Level.io. If you run into a crash, broken save, confusing quest reward, UI issue, or anything that feels off, send a message and we will take a look.</p>
+
+      <section aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact</h2>
+        <p>Email support at:</p>
+        <p><a class="contact" href="mailto:TheAvgDevs@gmail.com">TheAvgDevs@gmail.com</a></p>
+      </section>
+
+      <section aria-labelledby="include-heading">
+        <h2 id="include-heading">What To Include</h2>
+        <p>Please include as much of this as you can:</p>
+        <ul>
+          <li>App version and build number.</li>
+          <li>iPhone model and iOS version.</li>
+          <li>What you were trying to do.</li>
+          <li>What happened.</li>
+          <li>What you expected to happen.</li>
+          <li>Whether Reminders sync, Cloud backup, notifications, or diagnostics were enabled.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="diagnostics-heading">
+        <h2 id="diagnostics-heading">In-App Diagnostics</h2>
+        <p>If diagnostics sharing is enabled in Settings, Level.io can prepare a local diagnostic report. Please review the report before sending it. Diagnostics sharing is optional and manually controlled.</p>
+      </section>
+
+      <section aria-labelledby="privacy-heading">
+        <h2 id="privacy-heading">Privacy</h2>
+        <p>For details about how Level.io handles app data, read the <a href="privacy.html">privacy policy</a>.</p>
+      </section>
+    </article>
+
+    <footer>
+      <p>Last updated: 2026-04-30</p>
+      <p>(c) 2026 TheAvgDevs</p>
+    </footer>
+  </main>
+</body>
+</html>

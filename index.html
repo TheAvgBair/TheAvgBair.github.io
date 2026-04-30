@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Level.io Support</title>
+  <meta name="description" content="Support and privacy information for Level.io.">
+  <style>
+    :root {
+      color-scheme: dark light;
+      --bg: #0d0d18;
+      --panel: #20285f;
+      --panel-2: #171a3c;
+      --gold: #ffbf2f;
+      --cream: #fff1bd;
+      --muted: #b8b4c9;
+      --link: #7bdcff;
+      --border: #9a7417;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      color: var(--cream);
+      background:
+        linear-gradient(180deg, rgba(255, 191, 47, 0.07), transparent 18rem),
+        var(--bg);
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    .hero,
+    .card {
+      border: 2px solid var(--border);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .hero {
+      padding: clamp(24px, 6vw, 48px);
+      margin-bottom: 24px;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 8vw, 4.25rem);
+      line-height: 0.95;
+    }
+
+    h2 {
+      color: var(--gold);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 68ch;
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 2px solid var(--border);
+      color: #0f1020;
+      background: var(--gold);
+      text-decoration: none;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .button.secondary {
+      color: var(--cream);
+      background: #123c1c;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    footer {
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5df9b;
+        --panel: #fff4c7;
+        --panel-2: #efd074;
+        --cream: #26180d;
+        --muted: #5d4d39;
+        --link: #0a5f85;
+        --border: #8c650f;
+      }
+
+      .button.secondary {
+        color: #fff4c7;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">Level.io</h1>
+      <p>Support and privacy information for the retro RPG habit tracker where real tasks become quests, XP, gear, and character progress.</p>
+      <div class="actions">
+        <a class="button" href="support.html">Get Support</a>
+        <a class="button secondary" href="privacy.html">Privacy Policy</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Helpful links">
+      <article class="card">
+        <h2>Support</h2>
+        <p>Need help with a crash, broken save, confusing reward, Reminders sync, Cloud backup, or a UI issue?</p>
+        <p><a href="support.html">Open the support page</a></p>
+      </article>
+      <article class="card">
+        <h2>Privacy</h2>
+        <p>Level.io keeps app data on device unless you choose to export, sync, or share it.</p>
+        <p><a href="privacy.html">Read the privacy policy</a></p>
+      </article>
+    </section>
+
+    <footer>
+      <p>Contact: <a href="mailto:TheAvgDevs@gmail.com">TheAvgDevs@gmail.com</a></p>
+      <p>(c) 2026 TheAvgDevs</p>
+    </footer>
+  </main>
+</body>
+</html>
