@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StashPin Support</title>
+  <meta name="description" content="Support and privacy information for StashPin.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f5ef;
+      --ink: #1b1f23;
+      --muted: #5c6670;
+      --panel: #ffffff;
+      --accent: #2364aa;
+      --accent-strong: #17456f;
+      --border: #d6dce2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    .hero,
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      box-shadow: 0 14px 40px rgba(24, 36, 48, 0.08);
+    }
+
+    .hero {
+      padding: clamp(28px, 6vw, 48px);
+      margin-bottom: 20px;
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 12px;
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 7vw, 4rem);
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      color: var(--accent-strong);
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 68ch;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .actions,
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .actions {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--accent);
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      color: var(--accent-strong);
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101418;
+        --ink: #eef3f7;
+        --muted: #b8c2cc;
+        --panel: #171d23;
+        --accent: #8ec7ff;
+        --accent-strong: #b9dcff;
+        --border: #2e3843;
+      }
+
+      .button {
+        color: #101418;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">StashPin</h1>
+      <p>Support and privacy information for StashPin, a local-first app for remembering where your stored items live.</p>
+      <div class="actions" aria-label="StashPin links">
+        <a class="button" href="support.html">Get Support</a>
+        <a class="button secondary" href="privacy.html">Privacy Policy</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="About StashPin">
+      <article class="card">
+        <h2>Local First</h2>
+        <p>StashPin stores items, locations, notes, tags, photos, settings, and backups on your device.</p>
+      </article>
+      <article class="card">
+        <h2>No Tracking</h2>
+        <p>The app does not include accounts, ads, analytics, tracking SDKs, or developer-hosted cloud sync.</p>
+      </article>
+      <article class="card">
+        <h2>Backups</h2>
+        <p>You can create backup files from inside the app and choose where to save or share them.</p>
+      </article>
+    </section>
+
+    <footer>
+      <p>Last updated: 2026-06-23</p>
+      <p>(c) 2026 TheAvgDevs</p>
+    </footer>
+  </main>
+</body>
+</html>
