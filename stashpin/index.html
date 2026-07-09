@@ -3,168 +3,257 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>StashPin Support</title>
-  <meta name="description" content="Support and privacy information for StashPin.">
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg: #f7f5ef;
-      --ink: #1b1f23;
-      --muted: #5c6670;
-      --panel: #ffffff;
-      --accent: #2364aa;
-      --accent-strong: #17456f;
-      --border: #d6dce2;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--bg);
-    }
-
-    main {
-      width: min(880px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 56px 0;
-    }
-
-    .hero,
-    .card {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 8px;
-      box-shadow: 0 14px 40px rgba(24, 36, 48, 0.08);
-    }
-
-    .hero {
-      padding: clamp(28px, 6vw, 48px);
-      margin-bottom: 20px;
-    }
-
-    .card {
-      padding: 24px;
-    }
-
-    h1,
-    h2 {
-      margin: 0 0 12px;
-      line-height: 1.15;
-    }
-
-    h1 {
-      font-size: clamp(2.1rem, 7vw, 4rem);
-    }
-
-    h2 {
-      font-size: 1.15rem;
-      color: var(--accent-strong);
-    }
-
-    p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      max-width: 68ch;
-    }
-
-    a {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .actions,
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .actions {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      margin-top: 24px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      color: #fff;
-      background: var(--accent);
-      text-decoration: none;
-    }
-
-    .button.secondary {
-      color: var(--accent-strong);
-      background: transparent;
-      border: 1px solid var(--border);
-    }
-
-    .grid {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    footer {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #101418;
-        --ink: #eef3f7;
-        --muted: #b8c2cc;
-        --panel: #171d23;
-        --accent: #8ec7ff;
-        --accent-strong: #b9dcff;
-        --border: #2e3843;
+  <title>StashPin — Remember Where You Put Things</title>
+  <meta name="description" content="StashPin is a local-first iPhone app for saving where belongings live, with notes, tags, alternate names, and photo clues to help you find them later.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="apple-itunes-app" content="app-id=6783395764, affiliate-data=pt=128803022&amp;ct=sp_home_banner&amp;mt=8">
+  <meta name="theme-color" content="#075940">
+  <link rel="canonical" href="https://theavgbair.github.io/stashpin/">
+  <link rel="icon" href="/stashpin/assets/brand/app-icon.png">
+  <link rel="apple-touch-icon" href="/stashpin/assets/brand/app-icon.png">
+  <link rel="stylesheet" href="/stashpin/styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StashPin — Put it somewhere. Find it later.">
+  <meta property="og:description" content="Save the item, its location, and the clue that will jog your memory. StashPin keeps it on your iPhone, ready when you need it.">
+  <meta property="og:url" content="https://theavgbair.github.io/stashpin/">
+  <meta property="og:image" content="https://theavgbair.github.io/stashpin/assets/brand/app-icon.png">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "StashPin",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "iOS",
+    "url": "https://theavgbair.github.io/stashpin/",
+    "downloadUrl": "https://apps.apple.com/us/app/stashpin/id6783395764",
+    "image": "https://theavgbair.github.io/stashpin/assets/brand/app-icon.png",
+    "description": "A local-first iPhone app for remembering where stored belongings live using locations, notes, tags, alternate names, and selected photo clues.",
+    "featureList": [
+      "Search by item, location, tag, note, or alternate name",
+      "Store selected photo clues on device",
+      "Create and restore user-controlled backups",
+      "No account, in-app advertising, analytics, or tracking"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does StashPin keep my information?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Your items, locations, notes, tags, selected photos, settings, and backups are stored locally on your device."}
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an account?",
+        "acceptedAnswer": {"@type": "Answer", "text": "No. StashPin does not require an account and does not use in-app advertising, analytics, or tracking."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can I try it before unlocking unlimited items?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can keep up to 10 active items for free. Unlimited items are available through an optional subscription in the app."}
       }
-
-      .button {
-        color: #101418;
-      }
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
-  <main>
-    <section class="hero" aria-labelledby="title">
-      <h1 id="title">StashPin</h1>
-      <p>Support and privacy information for StashPin, a local-first app for remembering where your stored items live.</p>
-      <div class="actions" aria-label="StashPin links">
-        <a class="button" href="support.html">Get Support</a>
-        <a class="button secondary" href="privacy.html">Privacy Policy</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/stashpin/" aria-label="StashPin home">
+        <img src="/stashpin/assets/brand/app-icon.png" alt="" width="52" height="52">
+        <span>StashPin</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation" data-nav-toggle><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation" data-nav data-open="false">
+        <a href="#how-it-works">How it works</a>
+        <a href="#ideas">Ideas</a>
+        <a href="/stashpin/privacy.html">Privacy</a>
+        <a href="/stashpin/support.html">Support</a>
+        <a class="button" href="https://apps.apple.com/us/app/stashpin/id6783395764?pt=128803022&amp;ct=sp_web_home&amp;mt=8">View on the App Store</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <h1>Put it somewhere. <span class="accent">Find it later.</span></h1>
+          <p class="lead">Save the item, its location, and the clue that will jog your memory. StashPin keeps it on your iPhone, ready when you need it.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://apps.apple.com/us/app/stashpin/id6783395764?pt=128803022&amp;ct=sp_web_home&amp;mt=8">View on the App Store</a>
+            <a class="text-link" href="#how-it-works">See how it works</a>
+          </div>
+        </div>
+
+        <div class="phone-stage" aria-label="StashPin search and add-item screens" data-reveal>
+          <svg class="route-pin" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-pin"></use></svg>
+          <div class="phone-shell phone-shell--front">
+            <img src="/stashpin/assets/screenshots/search.png" alt="StashPin search finding a passport stored in a blue lockbox" width="1206" height="2622">
+          </div>
+          <div class="phone-shell phone-shell--rear">
+            <img src="/stashpin/assets/screenshots/add-item.png" alt="StashPin new item screen for saving an item and its location" width="1206" height="2622">
+          </div>
+          <div class="paper-note" aria-hidden="true">Garage<br>Shelf 2</div>
+        </div>
       </div>
     </section>
 
-    <section class="grid" aria-label="About StashPin">
-      <article class="card">
-        <h2>Local First</h2>
-        <p>StashPin stores items, locations, notes, tags, photos, settings, and backups on your device.</p>
-      </article>
-      <article class="card">
-        <h2>No Tracking</h2>
-        <p>The app does not include accounts, ads, analytics, tracking SDKs, or developer-hosted cloud sync.</p>
-      </article>
-      <article class="card">
-        <h2>Backups</h2>
-        <p>You can create backup files from inside the app and choose where to save or share them.</p>
-      </article>
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <h2 class="section-heading" data-reveal>A small habit that saves a long search.</h2>
+        <div class="step-rail">
+          <article class="step" data-reveal>
+            <div>
+              <span class="step-number">1</span>
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-box"></use></svg>
+            </div>
+            <div>
+              <h3>Save the item</h3>
+              <p>Add the item, where it lives, and any alternate names.</p>
+            </div>
+          </article>
+          <article class="step" data-reveal>
+            <div>
+              <span class="step-number">2</span>
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-note"></use></svg>
+            </div>
+            <div>
+              <h3>Add the clue</h3>
+              <p>Note the details that will jog your memory later.</p>
+            </div>
+          </article>
+          <article class="step" data-reveal>
+            <div>
+              <span class="step-number">3</span>
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-search"></use></svg>
+            </div>
+            <div>
+              <h3>Search when you need it</h3>
+              <p>Find it by item, location, tag, note, or alternate name.</p>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>Last updated: 2026-06-23</p>
-      <p>(c) 2026 TheAvgDevs</p>
-    </footer>
+    <section class="section section--bright">
+      <div class="container split">
+        <div class="device-duo" aria-label="StashPin photo and item-detail screens" data-reveal>
+          <div class="phone-shell">
+            <img src="/stashpin/assets/screenshots/photo-clue.png" alt="StashPin screen for adding a selected photo clue" width="1206" height="2622">
+          </div>
+          <div class="phone-shell">
+            <img src="/stashpin/assets/screenshots/item-detail.png" alt="StashPin item details showing location, notes, and tags" width="1206" height="2622">
+          </div>
+        </div>
+        <div data-reveal>
+          <h2 class="section-heading">Give your future self a better clue.</h2>
+          <p class="section-intro">A location is useful. A photo, note, tag, or alternate name makes it memorable. Save the details that match how you actually think.</p>
+          <div class="feature-list">
+            <article class="feature-row">
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-photo"></use></svg>
+              <div><h3>Photos</h3><p>Keep a visual clue with the item or location.</p></div>
+            </article>
+            <article class="feature-row">
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-note"></use></svg>
+              <div><h3>Notes</h3><p>Write down the detail you will wish you remembered.</p></div>
+            </article>
+            <article class="feature-row">
+              <svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-tag"></use></svg>
+              <div><h3>Tags and alternate names</h3><p>Search using the words that come to mind later.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy-band" aria-labelledby="privacy-title">
+      <div class="container privacy-grid">
+        <div data-reveal>
+          <h2 class="section-heading" id="privacy-title">Your stuff stays your <span class="accent">business.</span></h2>
+          <p class="section-intro">StashPin is local-first. There is no account, no in-app advertising, no analytics, and no tracking. You choose when to create or share a backup.</p>
+          <a class="text-link" href="/stashpin/privacy.html">Read the privacy policy</a>
+        </div>
+        <div class="phone-shell" data-reveal>
+          <img src="/stashpin/assets/screenshots/privacy-backup.png" alt="StashPin settings with Backup and Restore controls" width="1206" height="2622">
+        </div>
+        <ul class="privacy-rail" data-reveal>
+          <li>Stored on your device</li>
+          <li>No developer-hosted cloud sync</li>
+          <li>Backups under your control</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="ideas">
+      <div class="container ideas-layout">
+        <div data-reveal>
+          <h2 class="section-heading">A place for the things you keep.</h2>
+          <p class="section-intro">Use StashPin for the objects that are easy to store and surprisingly hard to find.</p>
+        </div>
+        <nav class="ideas-list" aria-label="StashPin ideas" data-reveal>
+          <a class="idea-link" href="/stashpin/home-storage/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-home"></use></svg><span>Home storage</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+          <a class="idea-link" href="/stashpin/moving-boxes/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-box"></use></svg><span>Moving boxes</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+          <a class="idea-link" href="/stashpin/garage-tools/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-tools"></use></svg><span>Garage and tools</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+          <a class="idea-link" href="/stashpin/important-documents/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-document"></use></svg><span>Important documents</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+          <a class="idea-link" href="/stashpin/seasonal-storage/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-gift"></use></svg><span>Seasonal and gift storage</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+          <a class="idea-link" href="/stashpin/privacy-first-organization/"><svg aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-lock"></use></svg><span>Privacy-first organization</span><svg class="chevron" aria-hidden="true"><use href="/stashpin/assets/icons.svg#icon-chevron"></use></svg></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section section--bright">
+      <div class="container faq-layout">
+        <h2 class="section-heading" data-reveal>Good to know.</h2>
+        <div class="faq-list" data-reveal>
+          <details open>
+            <summary>Where does StashPin keep my information?</summary>
+            <p>Your items, locations, notes, tags, selected photos, settings, and backups are stored locally on your device.</p>
+          </details>
+          <details open>
+            <summary>Do I need an account?</summary>
+            <p>No. StashPin does not require an account and does not use in-app advertising, analytics, or tracking.</p>
+          </details>
+          <details open>
+            <summary>Can I try it before unlocking unlimited items?</summary>
+            <p>Yes. You can keep up to 10 active items for free. Unlimited items are available through an optional subscription in the app.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-title">
+      <div class="container cta-grid">
+        <img class="cta-icon" src="/stashpin/assets/brand/app-icon.png" alt="" width="100" height="100">
+        <h2 id="cta-title">Make a note now. <span class="accent">Skip the search later.</span></h2>
+        <div class="cta-action">
+          <a class="button button--light" href="https://apps.apple.com/us/app/stashpin/id6783395764?pt=128803022&amp;ct=sp_web_home&amp;mt=8">View on the App Store</a>
+          <p>Available for iPhone.</p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="brand" href="/stashpin/"><img src="/stashpin/assets/brand/app-icon.png" alt="" width="42" height="42"><span>StashPin</span></a></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stashpin/#ideas">Ideas</a>
+        <a href="/stashpin/support.html">Support</a>
+        <a href="/stashpin/privacy.html">Privacy</a>
+        <a href="https://apps.apple.com/us/app/stashpin/id6783395764?pt=128803022&amp;ct=sp_web_home&amp;mt=8">App Store</a>
+      </nav>
+      <p class="copyright">© 2026 TheAvgDevs.</p>
+    </div>
+  </footer>
+  <script src="/stashpin/site.js" defer></script>
 </body>
 </html>
