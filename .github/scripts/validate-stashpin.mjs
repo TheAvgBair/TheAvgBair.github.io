@@ -7,6 +7,15 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 const stashpinRoot = path.join(repoRoot, "stashpin");
 const expectedProviderToken = "128803022";
 const expectedAppId = "6783395764";
+const expectedProductPageByFile = new Map([
+  ["stashpin/home-storage/index.html", "8244db4f-c7d3-429e-890f-ea0ad463ff04"],
+  ["stashpin/garage-tools/index.html", "8244db4f-c7d3-429e-890f-ea0ad463ff04"],
+  ["stashpin/important-documents/index.html", "89f60957-f009-465a-8bf3-7c650e21b306"],
+  ["stashpin/gift-hiding/index.html", "89f60957-f009-465a-8bf3-7c650e21b306"],
+  ["stashpin/moving-boxes/index.html", "a896d833-7e30-43dd-be68-35e3cfa2ad6d"],
+  ["stashpin/seasonal-storage/index.html", "a896d833-7e30-43dd-be68-35e3cfa2ad6d"],
+  ["stashpin/privacy-first-organization/index.html", "a84518dd-835f-49d4-ba42-859d4c67df03"],
+]);
 const errors = [];
 
 function assert(condition, message) {
@@ -79,6 +88,10 @@ for (const file of htmlFiles) {
     assert(/^sp_[A-Za-z0-9_]+$/.test(campaign ?? ""), `${relativeFile}: invalid ct`);
     assert((campaign?.length ?? Infinity) <= 30, `${relativeFile}: ct exceeds 30 characters`);
     if (campaign) campaigns.add(campaign);
+    const expectedProductPage = expectedProductPageByFile.get(relativeFile);
+    if (expectedProductPage) {
+      assert(url.searchParams.get("ppid") === expectedProductPage, `${relativeFile}: incorrect or missing ppid`);
+    }
   }
   assert(campaigns.size === 1, `${relativeFile}: expected one page campaign, found ${[...campaigns].join(", ")}`);
   const [pageCampaign] = campaigns;
