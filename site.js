@@ -49,7 +49,7 @@
     link.addEventListener("click", () => measure(link.dataset.product, link.href));
   });
 
-  if (consent && !localStorage.getItem(choiceKey)) consent.hidden = false;
+  if (consent && endpoint && !localStorage.getItem(choiceKey)) consent.hidden = false;
   document.querySelectorAll("[data-consent]").forEach((button) => {
     button.addEventListener("click", () => {
       localStorage.setItem(choiceKey, button.dataset.consent);
