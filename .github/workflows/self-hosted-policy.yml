@@ -1,0 +1,31 @@
+name: Self-hosted CI policy
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: [".github/workflows/**"]
+  push:
+    paths: [".github/workflows/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, linux, x64, proxmox, portfolio-quality, theavgbair-site]
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - name: Enforce workflow policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          hosted_pattern='(ubuntu|windows|macos)''-([0-9][^[:space:],]]*|latest)'
+          if grep -R -n -E "$hosted_pattern" .github/workflows; then exit 1; fi
+          while IFS= read -r workflow_file; do
+            while IFS= read -r action_ref; do
+              [[ "$action_ref" == ./* || "$action_ref" =~ @[0-9a-f]{40}$ ]] || exit 1
+            done < <(sed -nE 's/^[[:space:]]*uses:[[:space:]]*([^[:space:]#]+).*/\1/p' "$workflow_file")
+          done < <(find .github/workflows -type f \( -name '*.yml' -o -name '*.yaml' \) -print)
+
