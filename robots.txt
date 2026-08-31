@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://theavgbair.github.io/sitemap.xml
 Sitemap: https://theavgbair.github.io/stashpin/sitemap.xml

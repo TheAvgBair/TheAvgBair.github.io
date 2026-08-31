@@ -1,6 +1,6 @@
 # TheAvgDevs Portfolio and App Support Site
 
-The root is the mobile-first TheAvgDevs portfolio hub. Existing Level.io and StashPin support/privacy routes remain stable for App Store Connect.
+The root is the mobile-first TheAvgDevs portfolio hub. Existing Levelio and StashPin support/privacy routes remain stable for App Store Connect.
 
 - Portfolio: https://theavgbair.github.io/
 - Portfolio privacy: https://theavgbair.github.io/site-privacy.html
