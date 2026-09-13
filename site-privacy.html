@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio Site Privacy — TheAvgDevs</title>
+  <title>Portfolio Site Privacy - TheAvgDevs</title>
   <meta name="description" content="Privacy information for the TheAvgDevs portfolio website.">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=analytics-consent-20260913">
+  <script src="site.js?v=analytics-consent-20260913" defer></script>
 </head>
 <body>
   <header class="site-header"><a class="wordmark" href="/">TheAvgDevs<span>.</span></a><nav><a class="nav-cta" href="/">Portfolio</a></nav></header>
@@ -13,17 +14,30 @@
     <section class="principles" style="display:block;max-width:850px;padding-block:80px">
       <p class="section-number">Portfolio site privacy</p>
       <h1 style="font-size:clamp(3rem,8vw,6rem)">Optional means optional.</h1>
-      <p style="margin-top:32px">The portfolio can offer anonymous, first-party measurement of outbound product-link clicks. The Levelio page can also count a landing-page view and an App Store click. Measurement remains off unless you choose “Allow.”</p>
+      <p style="margin-top:32px">The portfolio can count outbound product-link clicks. The Levelio page can also count a landing-page view and an App Store click. Measurement stays off unless you choose "Allow."</p>
       <h2 style="font-size:2rem;margin-top:50px">What a consented event can contain</h2>
-      <p>Portfolio outbound clicks can include a product ID, campaign month, content ID, destination hostname, and observation time. Levelio page events contain only the Levelio product ID and an allowlisted landing-view or App Store-click event name; the service records a coarse event day. Events do not include a persistent browser identifier, task text, message content, an advertising profile, or a claimed downstream install or purchase.</p>
+      <p>Portfolio click events contain a product ID, a fixed source category, a website-generated calendar month, a website-generated card label, destination hostname, and a coarse UTC day. The site ignores campaign and content values supplied in an incoming link. Levelio page event requests contain only the Levelio product ID and an allowlisted landing-view or App Store-click event name. The service adds fixed source and destination values plus a coarse UTC day before it stores that event. Events do not include a persistent browser identifier, task text, message content, an advertising profile, session replay, or a claimed downstream install or purchase.</p>
+      <h2 style="font-size:2rem;margin-top:50px">Where events go</h2>
+      <p>Consented events go to a Cloudflare Worker and Cloudflare D1 database used by TheAvgDevs. The service deletes event rows after 31 days. Cloudflare may process ordinary service and request data under its own policies.</p>
       <h2 style="font-size:2rem;margin-top:50px">Unavailable results</h2>
-      <p>When an App Store install, marketplace purchase, or other downstream conversion cannot be observed, TheAvgDevs records it as unavailable—not zero and not an estimate.</p>
+      <p>When TheAvgDevs cannot observe an App Store install, marketplace purchase, or other downstream conversion, it records the result as unavailable. It does not enter zero or an estimate.</p>
       <h2 style="font-size:2rem;margin-top:50px">Your choice</h2>
-      <p>Your browser stores only the portfolio measurement choice. You can clear this site’s local storage to reset it. Product destinations have their own privacy policies and choices.</p>
+      <p id="measurement-settings">Your browser stores a versioned portfolio measurement choice for 180 days. <a href="#analytics-consent" data-analytics-settings aria-controls="analytics-consent">Open measurement settings</a> to allow or reject portfolio and Levelio page measurement. If your browser cannot save a choice, measurement remains off and the site can carry that rejection through the current session or same-site pages. Product destinations have their own privacy policies and choices.</p>
       <h2 style="font-size:2rem;margin-top:50px">Contact</h2>
-      <p>Questions can be sent to <a href="mailto:TheAvgDevs@gmail.com">TheAvgDevs@gmail.com</a>.</p>
+      <p>Tanner Bair operates TheAvgDevs. Questions can be sent to <a href="mailto:TheAvgDevs@gmail.com">TheAvgDevs@gmail.com</a>.</p>
     </section>
   </main>
-  <footer class="site-footer"><a class="wordmark" href="/">TheAvgDevs<span>.</span></a><p>Last updated: August 29, 2026</p><nav><a href="privacy.html">Levelio privacy</a><a href="stashpin/privacy.html">StashPin privacy</a></nav></footer>
+  <footer class="site-footer"><a class="wordmark" href="/">TheAvgDevs<span>.</span></a><p>Last updated: September 13, 2026</p><nav><a href="privacy.html">Levelio privacy</a><a href="stashpin/privacy.html">StashPin privacy</a><a href="#analytics-consent" data-analytics-settings aria-controls="analytics-consent">Measurement settings</a></nav></footer>
+  <aside class="consent" id="analytics-consent" aria-labelledby="consent-title" hidden>
+    <div>
+      <strong id="consent-title">Optional portfolio and Levelio page measurement</strong>
+      <p>Measurement stays off unless you choose Allow.</p>
+      <p id="analytics-consent-status" role="status" aria-live="polite"></p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" data-consent="granted">Allow</button>
+      <button class="secondary" type="button" data-consent="denied">Reject measurement</button>
+    </div>
+  </aside>
 </body>
 </html>

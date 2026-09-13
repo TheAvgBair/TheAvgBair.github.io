@@ -21,8 +21,8 @@
   <meta name="twitter:title" content="Levelio: RPG Habit Tracker for iPhone">
   <meta name="twitter:description" content="Turn real tasks into RPG progress with a private task and habit tracker for iPhone.">
   <meta name="twitter:image" content="https://theavgbair.github.io/assets/portfolio/levelio.webp">
-  <link rel="stylesheet" href="styles.css">
-  <script src="../site.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=analytics-consent-20260913">
+  <script src="../site.js?v=analytics-consent-20260913" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -266,6 +266,7 @@
       <a href="/support.html">Support</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/site-privacy.html">Site privacy</a>
+      <a href="/site-privacy.html#measurement-settings" data-analytics-settings aria-controls="analytics-consent">Measurement settings</a>
       <a class="product-link" data-product="levelio" href="https://apps.apple.com/us/app/levelio-rpg-habit-tracker/id6762884895">App Store</a>
     </nav>
     <p class="copyright">© 2026 TheAvgDevs</p>
@@ -273,12 +274,13 @@
 
   <aside class="consent" id="analytics-consent" aria-labelledby="consent-title" hidden>
     <div>
-      <strong id="consent-title">Optional, anonymous measurement</strong>
+      <strong id="consent-title">Optional Levelio page measurement</strong>
       <p>Allow us to count visits to this page and App Store clicks. Measurement stays off unless you choose Allow. <a href="/site-privacy.html">Site privacy</a></p>
+      <p id="analytics-consent-status" role="status" aria-live="polite"></p>
     </div>
     <div class="consent-actions">
       <button type="button" data-consent="granted">Allow</button>
-      <button class="secondary" type="button" data-consent="denied">Not now</button>
+      <button class="secondary" type="button" data-consent="denied">Reject measurement</button>
     </div>
   </aside>
 </body>

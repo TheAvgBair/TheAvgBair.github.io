@@ -126,8 +126,15 @@ for (const file of htmlFiles) {
   assert(!source.includes("$0.99"), `${relativeFile}: contains a hard-coded subscription price`);
 }
 
-const expectedRobots = "User-agent: *\nAllow: /\n\nSitemap: https://theavgbair.github.io/stashpin/sitemap.xml\n";
-assert(fs.readFileSync(path.join(repoRoot, "robots.txt"), "utf8") === expectedRobots, "root robots.txt does not match the safe allow-all StashPin sitemap policy");
+const expectedRootRobots = [
+  "User-agent: *",
+  "Allow: /",
+  "",
+  "Sitemap: https://theavgbair.github.io/sitemap.xml",
+  "Sitemap: https://theavgbair.github.io/stashpin/sitemap.xml",
+  ""
+].join("\n");
+assert(fs.readFileSync(path.join(repoRoot, "robots.txt"), "utf8") === expectedRootRobots, "root robots.txt must allow crawling and list the portfolio and StashPin sitemaps");
 assert(!fs.existsSync(path.join(stashpinRoot, "robots.txt")), "ineffective stashpin/robots.txt should not exist");
 
 const sitemap = fs.readFileSync(path.join(stashpinRoot, "sitemap.xml"), "utf8");

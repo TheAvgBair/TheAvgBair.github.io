@@ -1,10 +1,187 @@
 (() => {
-  const choiceKey = "theavgdevs_analytics_consent_v1";
+  const choiceKey = "theavgdevs_analytics_consent_v2";
+  const legacyChoiceKey = "theavgdevs_analytics_consent_v1";
+  const denialSessionKey = "theavgdevs_analytics_rejected_v2";
+  const denialQueryKey = "theavgdevs_measurement";
+  const denialQueryValue = "off";
+  const consentVersion = 2;
+  const consentTtlMs = 180 * 24 * 60 * 60 * 1000;
+  const consentChoices = new Set(["granted", "denied"]);
   const consent = document.querySelector("#analytics-consent");
+  const consentStatus = document.querySelector("#analytics-consent-status");
+  const choiceButtons = [...document.querySelectorAll("[data-consent]")];
+  const settingsButtons = [...document.querySelectorAll("[data-analytics-settings]")];
   const endpoint = document.querySelector('meta[name="theavgdevs-analytics-endpoint"]')?.content?.trim() || "";
   const query = new URLSearchParams(location.search);
   const isLevelioLanding = /\/levelio\/(?:index\.html)?$/.test(location.pathname);
   let levelioLandingMeasured = false;
+  let storageBlocked = false;
+  let sessionStorageBlocked = false;
+  let settingsOpen = false;
+  let temporaryDenial = query.get(denialQueryKey) === denialQueryValue;
+  let urlDenialFallback = temporaryDenial;
+
+  const storage = () => {
+    if (storageBlocked) return null;
+    try { return localStorage; } catch {
+      storageBlocked = true;
+      return null;
+    }
+  };
+
+  const session = () => {
+    if (sessionStorageBlocked) return null;
+    try { return sessionStorage; } catch {
+      sessionStorageBlocked = true;
+      return null;
+    }
+  };
+
+  const applyUrlDenialToLinks = () => {
+    document.querySelectorAll("a[href]").forEach((link) => {
+      try {
+        const url = new URL(link.href, location.href);
+        if (url.origin !== location.origin) return;
+        if (urlDenialFallback) url.searchParams.set(denialQueryKey, denialQueryValue);
+        else if (url.searchParams.get(denialQueryKey) === denialQueryValue) url.searchParams.delete(denialQueryKey);
+        link.href = url.toString();
+      } catch { /* Ignore malformed or non-web links. */ }
+    });
+  };
+
+  const setUrlDenialFallback = (enabled) => {
+    urlDenialFallback = enabled;
+    try {
+      const url = new URL(location.href);
+      if (enabled) url.searchParams.set(denialQueryKey, denialQueryValue);
+      else if (url.searchParams.get(denialQueryKey) === denialQueryValue) url.searchParams.delete(denialQueryKey);
+      history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    } catch { /* Link rewriting below still preserves the marker when needed. */ }
+    applyUrlDenialToLinks();
+  };
+
+  const hasTemporaryDenial = () => {
+    if (temporaryDenial) return true;
+    const savedSession = session();
+    if (!savedSession) return false;
+    try {
+      temporaryDenial = savedSession.getItem(denialSessionKey) === "1";
+      return temporaryDenial;
+    } catch {
+      sessionStorageBlocked = true;
+      return false;
+    }
+  };
+
+  const setTemporaryDenial = () => {
+    temporaryDenial = true;
+    const savedSession = session();
+    if (savedSession) {
+      try {
+        savedSession.setItem(denialSessionKey, "1");
+        return;
+      } catch { sessionStorageBlocked = true; }
+    }
+    setUrlDenialFallback(true);
+  };
+
+  const clearTemporaryDenial = () => {
+    temporaryDenial = false;
+    const savedSession = session();
+    if (savedSession) {
+      try { savedSession.removeItem(denialSessionKey); } catch { sessionStorageBlocked = true; }
+    }
+    if (urlDenialFallback) setUrlDenialFallback(false);
+  };
+
+  const preferenceFromRaw = (raw) => {
+    if (typeof raw !== "string") return null;
+    try {
+      const preference = JSON.parse(raw);
+      const now = Date.now();
+      if (
+        !preference || typeof preference !== "object"
+        || preference.version !== consentVersion
+        || !consentChoices.has(preference.choice)
+        || !Number.isSafeInteger(preference.savedAt)
+        || !Number.isSafeInteger(preference.expiresAt)
+        || preference.savedAt > now
+        || preference.expiresAt <= now
+        || preference.expiresAt - preference.savedAt !== consentTtlMs
+      ) return null;
+      return preference;
+    } catch { return null; }
+  };
+
+  const readConsent = () => {
+    const savedStorage = storage();
+    if (hasTemporaryDenial()) return { choice: "denied", storageAvailable: Boolean(savedStorage), fallbackDenied: true };
+    if (!savedStorage) return { choice: null, storageAvailable: false };
+    let raw;
+    try { raw = savedStorage.getItem(choiceKey); } catch {
+      storageBlocked = true;
+      return { choice: null, storageAvailable: false, fallbackDenied: false };
+    }
+    const preference = preferenceFromRaw(raw);
+    if (!preference) {
+      try {
+        savedStorage.removeItem(choiceKey);
+        savedStorage.removeItem(legacyChoiceKey);
+      } catch {
+        storageBlocked = true;
+        return { choice: null, storageAvailable: false, fallbackDenied: false };
+      }
+      return { choice: null, storageAvailable: true, fallbackDenied: false };
+    }
+    return { choice: preference.choice, storageAvailable: true, fallbackDenied: false };
+  };
+
+  const saveConsent = (choice) => {
+    const savedStorage = storage();
+    if (!savedStorage || !consentChoices.has(choice)) return false;
+    const savedAt = Date.now();
+    try {
+      savedStorage.setItem(choiceKey, JSON.stringify({
+        version: consentVersion,
+        choice,
+        savedAt,
+        expiresAt: savedAt + consentTtlMs
+      }));
+      savedStorage.removeItem(legacyChoiceKey);
+      clearTemporaryDenial();
+      return true;
+    } catch {
+      storageBlocked = true;
+      let staleChoiceRemoved = false;
+      try {
+        savedStorage.removeItem(choiceKey);
+        savedStorage.removeItem(legacyChoiceKey);
+        staleChoiceRemoved = true;
+      } catch { /* A session or URL marker keeps measurement off after navigation. */ }
+      if (!staleChoiceRemoved) setTemporaryDenial();
+      return false;
+    }
+  };
+
+  const getConsent = () => readConsent().choice;
+
+  const syncConsentUI = ({ reopen = false } = {}) => {
+    if (reopen) settingsOpen = true;
+    const state = readConsent();
+    const unavailable = !state.storageAvailable;
+    if (consent) consent.hidden = !(settingsOpen || !state.choice || unavailable || state.fallbackDenied);
+    for (const button of choiceButtons) button.disabled = unavailable;
+    if (consentStatus) {
+      consentStatus.textContent = unavailable
+        ? "This browser cannot save a measurement choice. Measurement is off."
+        : state.fallbackDenied
+          ? "Measurement remains off until you save a new choice."
+        : settingsOpen
+          ? "Choose Allow or Reject measurement. Your choice expires after 180 days."
+          : "";
+    }
+    return state;
+  };
 
   const monthCampaign = () => {
     const parts = new Intl.DateTimeFormat("en-CA", {
@@ -16,8 +193,7 @@
     return `${values.year}-${values.month}`;
   };
 
-  const campaign = query.get("utm_campaign") || monthCampaign();
-  const incomingContent = query.get("utm_content");
+  const campaign = monthCampaign();
   const isInstagramVisit = query.get("utm_source") === "instagram" && query.get("utm_medium") === "organic_social";
   const source = isInstagramVisit ? "instagram" : isLevelioLanding ? "levelio_website" : "theavgdevs_hub";
   const medium = isInstagramVisit ? "organic_social" : isLevelioLanding ? "organic_web" : "referral";
@@ -28,17 +204,16 @@
     url.searchParams.set("utm_source", source);
     url.searchParams.set("utm_medium", medium);
     url.searchParams.set("utm_campaign", campaign);
-    url.searchParams.set("utm_content", link.dataset.content || incomingContent || (isLevelioLanding ? "levelio-app-store" : `hub-${product}`));
+    url.searchParams.set("utm_content", link.dataset.content || (isLevelioLanding ? "levelio-app-store" : `hub-${product}`));
     link.href = url.toString();
   };
   document.querySelectorAll(".product-link").forEach(prepareLink);
 
-  const getConsent = () => {
-    try { return localStorage.getItem(choiceKey); } catch { return null; }
-  };
-
   const sendEvent = (payload) => {
-    if (getConsent() !== "granted" || !endpoint) return;
+    if (getConsent() !== "granted" || !endpoint) {
+      syncConsentUI();
+      return;
+    }
     navigator.sendBeacon(endpoint, new Blob([JSON.stringify(payload)], { type: "application/json" }));
   };
 
@@ -67,14 +242,15 @@
       product_id: product,
       source,
       campaign,
-      content: content || incomingContent || `hub-${product}`,
-      destination_host: new URL(destination).host,
-      observed_at: new Date().toISOString()
+      content: content || `hub-${product}`,
+      destination_host: new URL(destination).host
     });
   };
 
   // Delegation also covers cards loaded after the page has initialized.
   document.addEventListener("click", (event) => {
+    const anyLink = event.target.closest?.("a[href]");
+    if (anyLink && urlDenialFallback) applyUrlDenialToLinks();
     const link = event.target.closest?.("a.product-link");
     if (link) measure(link.dataset.product, link.href, link.dataset.content);
   });
@@ -129,7 +305,7 @@
         link.className = "reel-card-link product-link";
         link.href = reel.destinationUrl;
         link.dataset.product = reel.productId;
-        link.dataset.content = `reel-card:${reel.occurrenceId}`;
+        link.dataset.content = `reel-card:${reel.productId}`;
         prepareLink(link);
         const visual = document.createElement("div");
         visual.className = "reel-image";
@@ -177,13 +353,28 @@
   };
   loadInstagramReels();
 
-  if (getConsent() === "granted") measureLevelioLanding();
-  if (consent && endpoint && !getConsent()) consent.hidden = false;
-  document.querySelectorAll("[data-consent]").forEach((button) => {
+  const initialConsent = syncConsentUI();
+  if (initialConsent.choice === "granted") measureLevelioLanding();
+  choiceButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      try { localStorage.setItem(choiceKey, button.dataset.consent); } catch { /* Measurement remains off without stored consent. */ }
-      if (consent) consent.hidden = true;
-      if (button.dataset.consent === "granted") measureLevelioLanding();
+      const saved = saveConsent(button.dataset.consent);
+      settingsOpen = !saved;
+      const state = syncConsentUI();
+      if (saved && state.choice === "granted") measureLevelioLanding();
     });
+  });
+  settingsButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const state = syncConsentUI({ reopen: true });
+      const focusTarget = choiceButtons.find((choiceButton) => choiceButton.dataset.consent === (state.choice === "granted" ? "denied" : "granted"));
+      focusTarget?.focus();
+    });
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== choiceKey && event.key !== legacyChoiceKey && event.key !== null) return;
+    settingsOpen = false;
+    const state = syncConsentUI();
+    if (state.choice === "granted") measureLevelioLanding();
   });
 })();

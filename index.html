@@ -13,8 +13,8 @@
   <meta property="og:image" content="https://theavgbair.github.io/assets/portfolio/stashpin.webp">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23315ee8%22/><path d=%22M15 47 28 15h8l13 32h-9l-2-7H26l-2 7zm14-15h6l-3-9z%22 fill=%22white%22/></svg>">
   <link rel="canonical" href="https://theavgbair.github.io/">
-  <link rel="stylesheet" href="styles.css?v=instagram-cards-20260907">
-  <script src="site.js?v=instagram-cards-20260907" defer></script>
+  <link rel="stylesheet" href="styles.css?v=analytics-consent-20260913">
+  <script src="site.js?v=analytics-consent-20260913" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#tools">Skip to tools</a>
@@ -156,6 +156,7 @@
       <a href="support.html">Levelio support</a>
       <a href="stashpin/support.html">StashPin support</a>
       <a href="site-privacy.html">Site privacy</a>
+      <a href="site-privacy.html#measurement-settings" data-analytics-settings aria-controls="analytics-consent">Measurement settings</a>
       <a href="mailto:TheAvgDevs@gmail.com">Contact</a>
     </nav>
     <p class="copyright">© 2026 TheAvgDevs</p>
@@ -163,12 +164,13 @@
 
   <aside class="consent" id="analytics-consent" aria-labelledby="consent-title" hidden>
     <div>
-      <strong id="consent-title">Optional, anonymous measurement</strong>
-      <p>Allow us to count portfolio link clicks so we can learn which tools are useful. It stays off unless you choose Allow.</p>
+      <strong id="consent-title">Optional portfolio measurement</strong>
+      <p>Allow us to count portfolio link clicks so we can learn which tools are useful. It stays off unless you choose Allow. <a href="site-privacy.html">Site privacy</a></p>
+      <p id="analytics-consent-status" role="status" aria-live="polite"></p>
     </div>
     <div class="consent-actions">
       <button type="button" data-consent="granted">Allow</button>
-      <button class="secondary" type="button" data-consent="denied">Not now</button>
+      <button class="secondary" type="button" data-consent="denied">Reject measurement</button>
     </div>
   </aside>
 </body>
