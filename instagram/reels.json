@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T17:02:41.150Z",
+  "updatedAt": "2026-09-15T16:19:26.606Z",
   "reels": [
+    {
+      "occurrenceId": "2026-09-15-everydaycalc-moving-box-mix",
+      "productId": "everydaycalc",
+      "productName": "EverydayCalc",
+      "title": "Moving box calculator",
+      "destinationUrl": "https://everydaycalc.org/calculators/moving-box-calculator/",
+      "thumbnailUrl": "/instagram/2026-09-15-everydaycalc-moving-box-mix-4bb3aecf354f0be9.jpg",
+      "permalink": "https://www.instagram.com/reel/DdUH1gdlWLI/",
+      "publishedAt": "2026-09-15T16:18:47+00:00"
+    },
     {
       "occurrenceId": "2026-09-09-simpleletters-draft-to-send",
       "productId": "simpleletters",
