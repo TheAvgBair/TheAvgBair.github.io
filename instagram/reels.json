@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-16T16:26:11.456Z",
+  "updatedAt": "2026-09-17T16:17:56.648Z",
   "reels": [
+    {
+      "occurrenceId": "2026-09-17-projectradar-editorial-context",
+      "productId": "projectradar",
+      "productName": "Project Radar",
+      "title": "AlliHat discovery note",
+      "destinationUrl": "https://getprojectradar.com/projects/allihat",
+      "thumbnailUrl": "/instagram/2026-09-17-projectradar-editorial-context-f1d4259f25694b5a.jpg",
+      "permalink": "https://www.instagram.com/reel/DdZRTUICpHv/",
+      "publishedAt": "2026-09-17T16:17:43+00:00"
+    },
     {
       "occurrenceId": "2026-09-16-simpleletters-work-template",
       "productId": "simpleletters",
