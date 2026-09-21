@@ -1,7 +1,17 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T16:18:52.316Z",
+  "updatedAt": "2026-09-21T16:18:10.874Z",
   "reels": [
+    {
+      "occurrenceId": "2026-09-21-everydaycalc-percentage-visible",
+      "productId": "everydaycalc",
+      "productName": "EverydayCalc",
+      "title": "Classroom grade calculator",
+      "destinationUrl": "https://everydaycalc.org/calculators/grade-percentage-calculator-for-teachers/",
+      "thumbnailUrl": "/instagram/2026-09-21-everydaycalc-percentage-visible-17408830bbbfcd48.jpg",
+      "permalink": "https://www.instagram.com/reel/DdjkfLqEtCp/",
+      "publishedAt": "2026-09-21T16:17:46+00:00"
+    },
     {
       "occurrenceId": "2026-09-18-theavgstore-match-launch-review",
       "productId": "theavgstore",
